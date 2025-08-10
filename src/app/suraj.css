@@ -1,0 +1,28 @@
+/* suraj css */
+
+.manifestoPara2 span, .manifestoPara3 span, .aboutPara span, .aboutPara1 span, .aboutPara2 span, .aboutPara3 span, .aboutPara4 span, .manifestoPara4 span, .manifestoPara5 span, .manifestoPara6 span, .growthPara span, .promisePara span, .promisePara1 span, .promisePara2 span, .promisePara3 span{
+  background-clip: text !important;
+}
+
+@media (max-width: 540px) {
+    .privacy_banner {
+        height: 135.082126vw;
+    }
+     .disclaimer_banner {
+        height: 132.082126vw;
+    }
+}
+
+@media (min-width: 769px) {
+   
+    .inner_banner .inner_banner_container {
+        width: 42.5vw;
+    }
+
+    .about_section .about_wrapper .subtitle_57.s1{
+    margin: 1.04166666667vw 0 3.083333vw;
+}
+    .about_section .about_wrapper .subtitle_57.s0{
+    margin: 1.04166666667vw 0 -0.916667vw;
+}
+}
