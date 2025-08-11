@@ -12,6 +12,7 @@ export default function NurixWidget() {
         data-api-key="877b2acef1e946a7af3bfbd109776bc7"
         data-widget-id="146"
         crossOrigin="anonymous"
+        type="module"
       />
     </>
   );
