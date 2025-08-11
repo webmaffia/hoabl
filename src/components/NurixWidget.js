@@ -12,6 +12,7 @@ export default function NurixWidget() {
         data-widget-id="146"
         crossOrigin="anonymous"
         type="module"
+        data-controller="client"
       />
     </>
   );
