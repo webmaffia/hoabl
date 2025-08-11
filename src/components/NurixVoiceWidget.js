@@ -20,7 +20,7 @@ export default function NurixVoiceWidget() {
   useEffect(() => {
     const stored = localStorage.getItem('NurixsessionData');
     const nowTime = Date.now();
-    const expiryDays = 30 * 24 * 60 * 60 * 1000;
+    const expiryDays = 60 * 24 * 60 * 60 * 1000;
 
     if (!stored || nowTime - JSON.parse(stored).timestamp > expiryDays) {
       const sessionId = generateSessionId();

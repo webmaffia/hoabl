@@ -12,13 +12,12 @@ export default function NurixWidget() {
     }
       const openWidget = () => {
         if (window.nurixVoiceWidget) {
-          window.nurixWidget("OPEN", { sessionId, userId: "xxxx"} )
+         window.nurixWidget("OPEN", { sessionId, userId: "xxxx"}  )
         } else {
           setTimeout(openWidget, 300);
         }
       };
-  
-      openWidget();
+        openWidget();
     }, []);
 
   return (
@@ -31,7 +30,7 @@ export default function NurixWidget() {
         data-widget-id="138"
         crossOrigin="anonymous"
         type="module"
-        data-controller="client"
+       
       />
     </>
   );
