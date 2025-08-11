@@ -29,6 +29,15 @@ export default function NurixVoiceWidget() {
       }
     }
 
+    const declineBtn = document.querySelector('.decline-btn');
+    if (declineBtn) {
+      declineBtn.addEventListener('click', () => {
+        if (window.nurixVoiceWidget) {
+          window.nurixVoiceWidget('CLOSE');
+        }
+      });
+    }
+
     const newSessionId = generateSessionId();
     localStorage.setItem(
       'nurixSessionData',
@@ -51,6 +60,8 @@ export default function NurixVoiceWidget() {
     openWidget();
   };
 
+  
+
   return (
     <>
       <div
@@ -67,3 +78,4 @@ export default function NurixVoiceWidget() {
     </>
   );
 }
+
