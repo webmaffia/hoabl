@@ -45,7 +45,7 @@ export default function RootLayout({ children }) {
           <EnquiryCTA /> 
        <WhatsappChat/>
         <NurixVoiceWidget />
-        <NurixWidget/>
+        { <NurixWidget/> }
         </PopupProvider>
        </LenisProvider>
       </body>

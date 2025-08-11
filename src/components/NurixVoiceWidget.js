@@ -45,14 +45,14 @@ export default function NurixVoiceWidget() {
     }
 
     // Add click listener to .decline-btn to close widget
-    const declineBtn = document.querySelector('.decline-btn');
+    /* const declineBtn = document.querySelector('.decline-btn');
     if (declineBtn) {
       declineBtn.addEventListener('click', () => {
         if (window.nurixVoiceWidget) {
           window.nurixVoiceWidget('CLOSE');
         }
       });
-    }
+    } */
   }, []);
 
   return (
