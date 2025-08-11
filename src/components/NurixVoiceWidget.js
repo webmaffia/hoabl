@@ -1,8 +1,20 @@
 'use client';
 
 import Script from 'next/script';
+import { useEffect } from 'react';
 
 export default function NurixVoiceWidget() {
+  useEffect(() => {
+    const openWidget = () => {
+      if (window.nurixVoiceWidget) {
+        window.nurixVoiceWidget('OPEN', { sessionId: '1234', userId: 'xxxx' });
+      } else {
+        setTimeout(openWidget, 300);
+      }
+    };
+
+    openWidget();
+  }, []);
   return (
     <>
       <div id="chat-demo-nurix"></div>
