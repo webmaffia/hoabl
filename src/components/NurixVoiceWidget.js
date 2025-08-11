@@ -3,7 +3,7 @@ import Script from 'next/script';
 import { useEffect, useState } from 'react';
 
 export default function NurixVoiceWidget() {
-  const [sessionId, setSessionId] = useState(null);
+  /* const [sessionId, setSessionId] = useState(null);
 
   const generateSessionId = () => {
     const now = new Date();
@@ -14,10 +14,26 @@ export default function NurixVoiceWidget() {
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
     return `${year}${month}${day}${hours}${minutes}${seconds}`;
-  };
+  }; */
 
   useEffect(() => {
-    const storedData = localStorage.getItem('nurixSessionData');
+
+   let sessionId = localStorage.getItem('nurixChatSessionId');
+    if (!sessionId) {
+      sessionId = Math.floor(1000000000 + Math.random() * 9000000000).toString();
+      localStorage.setItem('nurixChatSessionId', sessionId);
+    }
+      const openWidget = () => {
+        if (window.nurixVoiceWidget) {
+          window.nurixWidget("OPEN", { sessionId, userId: "xxxx"} )
+        } else {
+          setTimeout(openWidget, 300);
+        }
+      };
+  
+      openWidget();
+    
+   /*  const storedData = localStorage.getItem('nurixSessionData');
     const now = Date.now();
     const expiryTime = 30 * 24 * 60 * 60 * 1000; // 30 days in ms
 
@@ -32,8 +48,12 @@ export default function NurixVoiceWidget() {
     const declineBtn = document.querySelector('.decline-btn');
     if (declineBtn) {
       declineBtn.addEventListener('click', () => {
+        console.log("Delete button cliecked");
         if (window.nurixVoiceWidget) {
-          window.nurixVoiceWidget('CLOSE');
+          window.nurixVoiceWidget('CLOSE', {
+          sessionId: sessionId,
+          userId: 'xxxx',
+        });
         }
       });
     }
@@ -43,10 +63,10 @@ export default function NurixVoiceWidget() {
       'nurixSessionData',
       JSON.stringify({ sessionId: newSessionId, timestamp: now })
     );
-    setSessionId(newSessionId);
+    setSessionId(newSessionId); */
   }, []);
 
-  const handleClick = () => {
+  /* const handleClick = () => {
     const openWidget = () => {
       if (window.nurixVoiceWidget) {
         window.nurixVoiceWidget('OPEN', {
@@ -58,7 +78,7 @@ export default function NurixVoiceWidget() {
       }
     };
     openWidget();
-  };
+  }; */
 
   
 
@@ -66,8 +86,8 @@ export default function NurixVoiceWidget() {
     <>
       <div
         id="chat-demo-nurix"
-        style={{ cursor: 'pointer' }}
-        onClick={handleClick}
+         style={{ cursor: 'pointer' }}
+        onClick={handleClick} 
       ></div>
 
       <Script
