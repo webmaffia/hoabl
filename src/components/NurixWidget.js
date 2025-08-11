@@ -19,7 +19,7 @@ export default function NurixWidget() {
         setTimeout(openWidget, 300);
       }
     };
-    
+
     const widgetDiv = document.getElementById('nurix-widget');
     if (widgetDiv) {
       widgetDiv.addEventListener('click', openWidget);
@@ -34,7 +34,7 @@ export default function NurixWidget() {
     <>
       <div id="nurix-widget" style={{ cursor: 'pointer' }}></div>
       <Script
-        id="nurix-widget-script"
+        id="nurix-widget"
         src="https://d3udl6i7sipqjw.cloudfront.net/prod/webwidget/chat.js"
         data-api-key="c714d6ccc4d94cf682b3dee5c214736f"
         data-widget-id="138"
