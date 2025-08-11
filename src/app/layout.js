@@ -62,11 +62,11 @@ export default function RootLayout({ children }) {
           </main>
           <Footer/>
           <EnquiryCTA /> 
-      <WhatsappChat/>
-      <NurixVoiceWidget />
-       <NurixWidget/>
+       <WhatsappChat/>
+        <NurixVoiceWidget />
+        <NurixWidget/>
         </PopupProvider>
-  </LenisProvider>
+       </LenisProvider>
       </body>
     </html>
    

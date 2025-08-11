@@ -171,7 +171,7 @@ const paragraphRef = useRef(null);
 
   return (
     <section ref={manifestoRef} data-section="manifesto_section" className="manifesto_section">
-      <div class="manifesto_title">
+      <div className="manifesto_title">
           <img src="/images/manifest/the.webp" alt="" width="129" height="85" />
       </div>
       <div ref={manifestoWrapperRef} className="manifesto_wrapper">
