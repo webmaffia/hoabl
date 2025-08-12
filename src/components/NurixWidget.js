@@ -7,8 +7,6 @@ export default function NurixWidget() {
     const openChatWidget = () => {
       if (window.nurixWidget) {
         window.nurixWidget('OPEN', { sessionId: '1234', userId: 'xxxx' });
-      } else {
-        setTimeout(openWidget, 300); 
       }
     };
     openChatWidget();

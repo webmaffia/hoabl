@@ -9,9 +9,7 @@ export default function NurixVoiceWidget() {
     const openVoiceWidget = () => {
       if (window.nurixVoiceWidget) {
         window.nurixVoiceWidget('OPEN', { sessionId: '1234', userId: 'xxxx' });
-      } else {
-        setTimeout(openWidget, 300); 
-      }
+      } 
     };
 
     openVoiceWidget();
