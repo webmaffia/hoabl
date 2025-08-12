@@ -6,13 +6,13 @@ import { useEffect } from 'react';
 
 export default function NurixVoiceWidget() {
    useEffect(() => {
-    const openVoiceWidget = () => {
-      if (window.nurixVoiceWidget) {
-        window.nurixVoiceWidget('OPEN', { sessionId: '1234', userId: 'xxxx' });
+    const openWidget = () => {
+      if (true) {
+        console.log("it working");
+        window.nurixVoiceWidget("OPEN", { sessionId: "1234", userId: "xxxx"} )
       } 
     };
-
-    openVoiceWidget();
+    openWidget();
   }, []);
 
   return (
