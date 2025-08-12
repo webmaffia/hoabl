@@ -1,18 +1,17 @@
-
-
 'use client';
 import Script from 'next/script';
 import { useEffect } from 'react';
 
 export default function NurixVoiceWidget() {
-   useEffect(() => {
-    const openWidget = () => {
-      if (window.nurixVoiceWidget) {
-        console.log("it working");
-        window.nurixVoiceWidget("OPEN", { sessionId: "1234", userId: "xxxx"} )
-      } 
-    };
-    openWidget();
+  useEffect(() => {
+    const chatDiv = document.getElementById('chat-demo-nurix');
+    if (chatDiv) {
+      chatDiv.addEventListener('click', () => {
+        if (window.nurixVoiceWidget) {
+          window.nurixVoiceWidget("OPEN", { sessionId: "1234", userId: "xxxx" });
+        }
+      });
+    }
   }, []);
 
   return (
@@ -26,4 +25,3 @@ export default function NurixVoiceWidget() {
     </>
   );
 }
-
