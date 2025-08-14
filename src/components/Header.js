@@ -196,7 +196,7 @@ export default function Header() {
         <img src="/images/menu.webp" alt="menu" className="menu_img" width="56" height="36" />
       </div>
     </header>
-      <NavLink href="https://registration.growwithhoabl.com" target="_blank" className={`login_btn${isMenuActive ? "active" : ""}`}><span className="view_white">Login</span></NavLink>
+      <NavLink href="https://registration.growwithhoabl.com" target="_blank" className={`login_btn ${isMenuActive ? "active" : ""}`}><span className="view_white">Login</span></NavLink>
     </>
 );
 }

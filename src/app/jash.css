@@ -309,6 +309,11 @@ footer .footer_para_wrapper .disclaimer_text {
 
   }
 
+  header .logo_img.active img{
+    filter: invert(1) brightness(0);
+    transition-delay: 1s;
+  }
+
   #contactForm{
     margin-bottom: 10vw !important;
   }
@@ -527,12 +532,12 @@ header.active.whiteheader .logo_img {
 }
 
 
-.active .text_bg2{
+/* .active .text_bg2{
   background: linear-gradient(145deg, #ffb454 0%, #d75c33 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
-}
+} */
 
 #contactForm{
   width: 95%;
@@ -555,7 +560,7 @@ footer .footer_para_wrapper .footer_para {
 
 
 .hovermumbai:hover{
-  background: linear-gradient(145deg, #ffb454 0%, #d75c33 100%);
+  background: linear-gradient(145deg, #50b95f 0%, #3c9c4a 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
