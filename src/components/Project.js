@@ -86,7 +86,7 @@ export default function Projects() {
 
         gsap.to(wordSpans, {
           color: 'transparent',
-          background: 'linear-gradient(145deg, #ffb454 0%, #d75c33 100%)',
+          background: 'linear-gradient(145deg, #000 0%, #000 100%)',
           backgroundClip: 'text',
           webkitBackgroundClip: 'text',
           webkitTextFillColor: 'transparent',

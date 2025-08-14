@@ -139,7 +139,7 @@ export default function Header() {
       </NavLink>
 
       <div className={`header_nav ${isMenuActive ? "active" : ""}`}>
-        <div className="close_text view_white subtitle_24" onClick={handleCloseClick}>Close</div>
+        <div className="close_text view_link subtitle_24" onClick={handleCloseClick}>Close</div>
         <ul className="header_navigation">
           <li className="header_list">
             <NavLink href="/about" className="subtitle_22 header_link view_white text_bg2" >ABOUT US</NavLink>

@@ -160,7 +160,7 @@ export default function Banner() {
       {!(isAnimationLoaded && isVideoReady) && (
         <div style={{
           position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh",
-          background: 'linear-gradient(145deg, #ffb454 0%, #d75c33 100%)',
+          background: 'linear-gradient(145deg, #000 0%, #000 100%)',
           display: "flex", justifyContent: "center", alignItems: "center",
           zIndex: 9999999, backdropFilter: "blur(10px)"
         }}>

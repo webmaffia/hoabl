@@ -31,7 +31,9 @@ header {
 } */
 
 .sticky .sticky_tag{
-  background: linear-gradient(145deg, #ffb454 0%, #d75c33 100%);
+  /* background: linear-gradient(145deg, #ffb454 0%, #d75c33 100%); */
+    background: linear-gradient(145deg,#50b95f 0%, #3c9c4a 100%);
+
   color: #fff;
   /* border: 1px solid #fff; */
 }

@@ -116,7 +116,7 @@ export default function Manifesto() {
 
             gsap.to(wordSpans, {
               color: 'transparent',
-              background: 'linear-gradient(145deg, #ffb454 0%, #d75c33 100%)',
+              background: 'linear-gradient(145deg, #000 0%, #000 100%)',
               backgroundClip: 'text',
               webkitBackgroundClip: 'text',
               webkitTextFillColor: 'transparent',
@@ -472,8 +472,8 @@ export default function Manifesto() {
             </style>
             <linearGradient id="linear-gradient" x1="115.64" y1="7919.75" x2="292.78" y2="7919.75"
                 gradientTransform="matrix(1, 0, 0, -1, 0, 8064.6)" gradientUnits="userSpaceOnUse">
-                <stop offset="0" stop-color="#faa951" />
-                <stop offset="1" stop-color="#dd6a38" />
+                <stop offset="0" stop-color="#50b95f" />
+                <stop offset="1" stop-color="#3c9c4a" />
             </linearGradient>
             <linearGradient id="linear-gradient-2" x1="0" y1="710.79" x2="410.36" y2="710.79"
                 gradientTransform="matrix(1, 0, 0, 1, 0, 0)" href="#linear-gradient" />
@@ -724,8 +724,8 @@ export default function Manifesto() {
             </style>
             <linearGradient id="linear-gradient" x1="407.13" y1="94.3" x2="1258.08" y2="71.53"
                 gradientUnits="userSpaceOnUse">
-                <stop offset="0" stop-color="#faa951" />
-                <stop offset="1" stop-color="#dd6a38" />
+                <stop offset="0" stop-color="#50b95f" />
+                <stop offset="1" stop-color="#3c9c4a" />
             </linearGradient>
             <linearGradient id="linear-gradient-2" x1="407.24" y1="98.26" x2="1258.19" y2="75.49"
                 href="#linear-gradient" />

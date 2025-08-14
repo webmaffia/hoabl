@@ -63,7 +63,7 @@ export default function  AboutPage() {
             if (r === aboutRef || r === aboutRef1) {
               gsap.to(wordSpans, {
                 color: 'transparent',
-                background: 'linear-gradient(145deg, #ffb454 0%, #d75c33 100%)',
+                background: 'linear-gradient(145deg, #000 0%, #000 100%)',
                 backgroundClip: 'text',
                 webkitBackgroundClip: 'text',
                 webkitTextFillColor: 'transparent',
@@ -90,7 +90,7 @@ export default function  AboutPage() {
             const visionContainer = aboutRef2.current.parentElement || aboutRef2.current;
             const sharedProps = {
               color: 'transparent',
-              background: 'linear-gradient(145deg, #ffb454 0%, #d75c33 100%)',
+              background: 'linear-gradient(145deg, #000 0%, #000 100%)',
               backgroundClip: 'text',
               webkitBackgroundClip: 'text',
               webkitTextFillColor: 'transparent',

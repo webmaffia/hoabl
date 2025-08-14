@@ -80,7 +80,7 @@ const paragraphRef = useRef(null);
 
       gsap.to(wordSpans, {
         color: 'transparent',
-        background: 'linear-gradient(145deg, #ffb454 0%, #d75c33 100%)',
+        background: 'linear-gradient(145deg, #000 0%, #000 100%)',
         backgroundClip: 'text',
         webkitBackgroundClip: 'text',
         webkitTextFillColor: 'transparent',
@@ -179,15 +179,15 @@ const paragraphRef = useRef(null);
   return (
     <section ref={manifestoRef} data-section="manifesto_section" className="manifesto_section">
       <div class="manifesto_title">
-          <img src="/images/manifest/the.webp" alt="" width="129" height="85" />
+          <img src="/images/green/manifest/the.webp" alt="" width="129" height="85" />
       </div>
       <div ref={manifestoWrapperRef} className="manifesto_wrapper">
         <div ref={firstImgRef} className="first_img">
           <picture>
-              <source media="(max-width: 540px)" srcSet="/images/manifest/mob_first_img.webp" />
-              <img src="/images/manifest/first_img.webp" alt="" width="1800" height="146" />
+              <source media="(max-width: 540px)" srcSet="/images/green/manifest/mob_first_img.webp" />
+              <img src="/images/green/manifest/first_img.webp" alt="" width="1800" height="146" />
           </picture>
-          <img src="/images/border.webp" className="border_img" />
+          <img src="/images/green/border.webp" className="border_img" />
         </div>
         <div className="manifesto_main_container">
           <div className="profile_img">
@@ -288,10 +288,10 @@ const paragraphRef = useRef(null);
         </div>
         <div ref={secondImgRef} className="second_img">
           <picture>
-              <source media="(max-width: 540px)" srcSet="/images/manifest/mob_second_img.webp" />
-              <img src="/images/manifest/second_img.webp" alt="" width="1800" height="146" />
+              <source media="(max-width: 540px)" srcSet="/images/green/manifest/mob_second_img.webp" />
+              <img src="/images/green/manifest/second_img.webp" alt="" width="1800" height="146" />
           </picture>
-          <img src="/images/border.webp" className="border_img" />
+          <img src="/images/green/border.webp" className="border_img" />
         </div>
       </div>
 

@@ -161,8 +161,8 @@ export default function BridgeSvg(){
   `}</style>
             <linearGradient id="linear-gradient" x1="-44.66" y1="233.97" x2="530.45" y2="233.97"
                 gradientUnits="userSpaceOnUse">
-                <stop offset="0" stopColor="#faa950" />
-                <stop offset="1" stopColor="#dd6938" />
+                <stop offset="0" stopColor="rgba(0,0,0, .5)" />
+                <stop offset="1" stopColor="rgba(0,0,0, .5)" />
             </linearGradient>
             <linearGradient id="linear-gradient-2" x1="-39.73" y1="680.09" x2="1402.1" y2="680.09"
                 xlinkHref="#linear-gradient" />
