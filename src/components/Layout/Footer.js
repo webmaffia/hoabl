@@ -169,11 +169,11 @@ export default function Footer() {
                         </ul>
                     </li>
                 </ul>
-                {/* <ul>
+                <ul>
                     <li className="textAni">
-                        <NavLink href="#promises" className="subtitle_24 ">Promises</NavLink>
+                        <NavLink href="/promises" className="subtitle_24 ">Promises</NavLink>
                     </li>
-                </ul> */}
+                </ul>
                 <ul>
                     <li className="textAni">
                         <NavLink href="/#growth" className="subtitle_24 ">Growth Corridor</NavLink>

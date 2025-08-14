@@ -13,7 +13,6 @@ export default function Header() {
   const [hasBeenShown, setHasBeenShown] = useState(false);
   const [shouldShowBlackHeader, setShouldShowBlackHeader] = useState(false);
   const [currentScrollY, setCurrentScrollY] = useState(0);
-  const [utmParams, setUtmParams] = useState('');
   const lastScrollY = useRef(0);
 
   
@@ -132,25 +131,6 @@ export default function Header() {
     </Link>
   );
 
-   useEffect(() => {
-    const storageKey = 'NurixSessionData';
-    const stored = localStorage.getItem(storageKey);
-    let sessionId = null;
-
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      sessionId = parsed.sessionId; // same ID from layout.js
-    }
-
-    const openChatWidget = () => {
-      if (window.nurixWidget && sessionId) {
-        window.nurixWidget('OPEN', { sessionId, userId: 'xxxx' });
-      }
-    };
-
-    openChatWidget();
-  }, []);
-
   return (
     <>
     <header className={headerClassName}>
@@ -188,7 +168,7 @@ export default function Header() {
             </ul>
           </li>
           <li className="header_list">
-            <NavLink href="/#promises" className="subtitle_22 header_link view_white text_bg2" >PROMISES</NavLink>
+            <NavLink href="/promises" className="subtitle_22 header_link view_white text_bg2" >PROMISES</NavLink>
           </li>
           <li className="header_list">
             <NavLink href="/#growth" className="subtitle_22 header_link view_white text_bg2" >GROWTH CORRIDORS</NavLink>

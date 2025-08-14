@@ -171,7 +171,7 @@ export default function Promises() {
             
           
         </p>
-        {/* <a href="promises" className="subtitle_48 textAni"><span className="link">KNOW MORE</span></a> */}
+        <a href="/promises" className="subtitle_48 view_link textAni"><span className="link">KNOW MORE</span></a>
       </div>
     </section>
   );
