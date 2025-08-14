@@ -12,7 +12,7 @@ export default function Disclaimer() {
     </picture>
     <div className="inner_banner_container">
         <h2 className="subtitle_10877">
-            The Fine Print for a Bigger Picture
+            The Fine Print for a Bigger Picture.
         </h2>
     </div>
 </section>

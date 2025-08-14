@@ -174,7 +174,7 @@ export default function FooterForm() {
         </div>
 
         <div className="input_data w100">
-          <label htmlFor="message">Message</label>
+          <label htmlFor="message">What Do You Have In Mind?</label>
           <textarea
             name="message"
             rows="1"

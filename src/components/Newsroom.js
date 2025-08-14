@@ -19,7 +19,8 @@ export default function Newsroom() {
   const yearSliderSettings = {
     slidesToScroll: 1,
     slidesToShow: 3,
-    speed: 3500,
+    speed: 1500,
+    autoplaySpeed: 3500,
     asNavFor: newsSliderRef.current,
     arrows: false,
     dots: false,
@@ -34,7 +35,8 @@ export default function Newsroom() {
 
  
   const newsSliderSettings = {
-    speed: 3500,
+    speed: 1500,
+    autoplaySpeed: 3500,
     slidesToShow: 1,
     slidesToScroll: 1,
     asNavFor: yearSliderRef.current,
@@ -113,21 +115,75 @@ export default function Newsroom() {
       year: "24",
       news: [
         {
-          title: "House of Abhinandan Lodha buys American Center in Mumbai for ₹56 crore",
+          title: "House of Abhinandan Lodha buys American Center in Mumbai for ₹56 crore.",
           city: "Mumbai",
           publication: "Hindustan Times",
           date: "Nov 2024",
           link:'https://www.hindustantimes.com/real-estate/house-of-abhinandan-lodha-buys-american-center-in-mumbai-for-rs-56-crore-101732957614571.html'
         },
         {
-          title: "House of Abhinandan Lodha buys American Center in South Mumbai's Marine Lines",
+          title: "House of Abhinandan Lodha buys American Center in South Mumbai's Marine Lines.",
           city: "Mumbai",
           publication: "The Economic Times",
           date: "Nov 2024",
           link:'https://economictimes.indiatimes.com/industry/services/property-/-cstruction/house-of-abhinandan-lodha-buys-american-center-in-south-mumbais-marine-lines/articleshow/115818282.cms?from=mdr'
         },
         {
-          title: "Abhinandan Lodha acquires Mumbai American Centre for ₹56 crore",
+          title: "Abhinandan Lodha acquires Mumbai American Centre for ₹56 crore.",
+          city: "Mumbai",
+          publication: "The Hindu",
+          date: "Dec 2024",
+          link:'https://www.thehindu.com/business/Industry/abhinandan-lodha-acquires-mumbai-american-centre-for-56-crore/article68948353.ece'
+        }
+      ]
+    },
+     {
+      year: "25",
+      news: [
+        {
+          title: "House of Abhinandan Lodha forays into vertical real estate in Mumbai - With a collective development potential of 3.1 million square feet, the company expects to generate revenue of ₹3,500 crore, with a total investment of ₹2,500 crore.",
+          city: "Mumbai",
+          publication: "Fortune India",
+          date: "April 2025",
+          link:'https://www.fortuneindia.com/business-news/house-of-abhinandan-lodha-forays-into-vertical-real-estate-in-mumbai/122398'
+        },
+        {
+          title: "HoABL enters vertical realty business, to invest Rs 2,500 crore - The funding would be through mix of internal accruals and debt for working capital and pre- sales, said Abhinandan Lodha, Chairman of HoABL. ",
+           city: "Mumbai",
+           publication: "The Indian Express",
+          date: "April 2025",
+          link:'https://indianexpress.com/article/business/hoabl-enters-vertical-realty-business-to-invest-rs-2500-crore-9961894/'
+
+          
+        },
+        {
+          title: "House of Abhinandan Lodha forays into vertical real estate in Mumbai - House of Abhinandan Lodha (HoABL) announces its foray into vertical development with three Mumbai projects in Marine Lines, Chowpatty, and Naigaon, totaling 3.1 million sq ft and Rs 3,500 crore revenue potential.",
+           city: "Mumbai",
+           publication: "Financial Express",
+          date: "April 2025",
+          link:'https://www.financialexpress.com/business/industry/house-of-abhinandan-lodha-forays-into-vertical-real-estate-in-mumbai/3819805/'
+        }
+      ]
+    },
+    {
+      year: "24",
+      news: [
+        {
+          title: "House of Abhinandan Lodha buys American Center in Mumbai for ₹56 crore.",
+          city: "Mumbai",
+          publication: "Hindustan Times",
+          date: "Nov 2024",
+          link:'https://www.hindustantimes.com/real-estate/house-of-abhinandan-lodha-buys-american-center-in-mumbai-for-rs-56-crore-101732957614571.html'
+        },
+        {
+          title: "House of Abhinandan Lodha buys American Center in South Mumbai's Marine Lines.",
+          city: "Mumbai",
+          publication: "The Economic Times",
+          date: "Nov 2024",
+          link:'https://economictimes.indiatimes.com/industry/services/property-/-cstruction/house-of-abhinandan-lodha-buys-american-center-in-south-mumbais-marine-lines/articleshow/115818282.cms?from=mdr'
+        },
+        {
+          title: "Abhinandan Lodha acquires Mumbai American Centre for ₹56 crore.",
           city: "Mumbai",
           publication: "The Hindu",
           date: "Dec 2024",

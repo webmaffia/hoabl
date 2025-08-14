@@ -1,9 +1,16 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { createContext, useContext, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Lenis from "@studio-freight/lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+const LenisContext = createContext(null);
+
+// 2️⃣ Export hook
+export function useLenisInstance() {
+  return useContext(LenisContext);
+}
 
 export default function LenisProvider({ children }) {
   const pathname = usePathname();

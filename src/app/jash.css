@@ -33,7 +33,9 @@ header {
 .sticky .sticky_tag{
   background: linear-gradient(145deg, #ffb454 0%, #d75c33 100%);
   color: #fff;
+  /* border: 1px solid #fff; */
 }
+
 
 
 @media all and (max-width: 540px) {
@@ -196,12 +198,28 @@ html{
 } */
 
 
+.menifesto_box_container{
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  margin-right: 5vw;
+  flex-wrap: wrap;
+  gap: 5vw;
+}
+
+.menifesto_box_container .menifesto_box_content{
+  width: 30vw;
+}
+
 
 
 @media screen and (min-width: 800px) {
+  .menifesto_wrapper .menifesto_img {
+    top: 8vw;
+  }
 
   .manifesto_section .profile_img .slider_profile {
-    width: 41.135417vw;
+    width: 41.135417vw ;
 }
 
 .manifesto_section .slider_profile_text .slick-current.slick-active {
@@ -215,13 +233,18 @@ html{
     margin-bottom: 6.625vw;
   } 
   .manifestoPara1,.manifestoPara2,.manifestoPara3,.manifestoPara4,.manifestoPara5,.manifestoPara6 {
-    width: 38vw;
+    width: 100%;
     margin: 0 auto;
     margin-bottom:1.625vw ;
   }
 
   .manifestoPara1 {
-    width: 35vw;
+    width: 60vw;
+    margin: 0 auto;
+  }
+
+  .manifestoPara3 {
+    width: 60vw;
     margin: 0 auto;
   }
   .leadership_section .leader_img {
@@ -229,11 +252,12 @@ html{
 }
   footer
 {
-  padding:10.072917vw 4.32291666667vw 3.15625vw
+  /* padding:10.072917vw 4.32291666667vw 3.15625vw */
 }
-  header.active .header_nav {width: 36.041667vw;
+  header.active .header_nav {
+    /* width: 36.041667vw;
   padding: 7.8125vw 5.604167vw 2.60416666667vw;
-right: -38.25vw;
+right: -38.25vw; */
 } 
   .sticky .sticky_tag, .subtitle_2885 {
  font-size: 1.3vw;
@@ -276,6 +300,27 @@ footer .footer_para_wrapper .disclaimer_text {
 }
 }
 @media screen and (max-width: 800px) {
+  
+    .future_wrapper .subtitle_2307 span {
+
+    margin-bottom: .520833333333vw;
+
+  }
+
+  #contactForm{
+    margin-bottom: 10vw !important;
+  }
+
+  .future_wrapper .subtitle_2307 {
+    line-height: 1.2 !important;
+  }
+  .manifesto_section .profile_img .slider_profile {
+    width: 112vw;
+    margin-left: -11vw;
+}
+    .manifesto_section .profile_img {
+    width: 87.92vw !important ;
+}
   .sticky .sticky_tag {
     font-size: 4.8309178744vw !important;
 }
@@ -284,8 +329,13 @@ footer .footer_para_wrapper .disclaimer_text {
 }
 
   .menifesto_wrapper .menifesto_content {
-    margin-top: 69.666667vw !important;
+    margin-top: 76vw !important;
     color: #333333;
+}
+
+
+  .menifesto_wrapper .menifesto_container:nth-child(3) .menifesto_content {
+    margin-top: 105.666667vw !important;
 }
 
 .manifestoPara1 {
@@ -296,11 +346,20 @@ footer .footer_para_wrapper .disclaimer_text {
 }
 
 .menifesto_wrapper .menifesto_img {
-  top:40.154589372vw
+  top:50.154589372vw
 }
 
 .menifesto_wrapper .menifesto_container:nth-child(2) .menifesto_content {
-  margin-top: 78.5625vw !important;
+  margin-top: 104.5625vw !important;
+}
+
+
+.menifesto_box_container{
+  flex-direction: column;
+}
+
+.menifesto_box_container .menifesto_box_content{
+  width: 100%;
 }
 
  /*
@@ -324,7 +383,7 @@ footer .footer_para_wrapper .disclaimer_text {
     transition: opacity 0.3s ease;
   }
 .subtitle_70 {
-    font-size: 14.695652vw;
+    font-size: 12.695652vw;
 }
   .DB-Wrapper {
     position: relative;
@@ -438,22 +497,31 @@ bottom:-80px;
   color: #fff !important;
 }
 
+
 header.active.whiteheader .logo_img {
-  opacity: 0 !important;
+  transition: all .4s ease-in;
+  transition-delay: 1s;
 }
+
 
 header.active .logo_img {
   opacity: 0 !important;
 }
 
+header.active.whiteheader .logo_img.active {
+  opacity: 1 !important;
+  filter: invert(1) brightness(0) !important;
+  transition: all .4s ease-in;
+  transition-delay: 1s;
+}
+
+header.active.whiteheader .logo_img {
+  opacity: 1 !important;
+}
 
 
 .news_section .news_wrapper ul li .news_link {
   color: rgb(161, 161, 161) !important;
-}
-
-sup{
-  font-size: 12px;
 }
 
 
@@ -468,6 +536,7 @@ sup{
   width: 95%;
     height: 40vw;
     margin-left: 2.5vw;
+    margin-bottom: 5vw;
 }
 
 .contact_form .input_data label {
@@ -484,7 +553,7 @@ footer .footer_para_wrapper .footer_para {
 
 
 .hovermumbai:hover{
-background: linear-gradient(145deg, #ffb454 0%, #d75c33 100%);
+  background: linear-gradient(145deg, #ffb454 0%, #d75c33 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
@@ -497,10 +566,16 @@ background: linear-gradient(145deg, #ffb454 0%, #d75c33 100%);
 }
 
 .menifesto_wrapper .menifesto_content {
-    margin-top: 47.666667vw;
+    margin-top: 50.666667vw;
     color: #333333;
 }
 
 .menifesto_wrapper .menifesto_container:nth-child(2) .menifesto_content {
-    margin-top: 55.5625vw;
+    margin-top: 64.5625vw;
+}
+.menifesto_wrapper .menifesto_container:nth-child(3) .menifesto_content {
+    margin-top: 66.916667vw;
+}
+.d-none {
+  display: none;
 }

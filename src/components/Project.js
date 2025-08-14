@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect,useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
@@ -13,7 +13,15 @@ export default function Projects() {
   const projectNumRef = useRef(null);
   const growthRef = useRef(null);
   const sectionRef = useRef(null);
+  
+  const [isMobile, setIsMobile] = useState(false);
 
+  useEffect(() => {
+    const checkIsMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.set(imageRef.current, { x: "-100%" });
@@ -24,7 +32,7 @@ export default function Projects() {
           trigger: imageRef.current,
           start: "top 60%",
           end: "bottom 20%",
-          toggleActions: "play reverse play reverse"
+          toggleActions: "play play play reverse"
         }
       });
 
@@ -38,6 +46,20 @@ export default function Projects() {
         duration: 0.8,
         ease: "power2.out"
       }, "-=0.4");
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start:'top top',
+          end: 'bottom top',
+          scrub: 1,
+          pin: true,
+         
+        }
+      });
+
+
+  
 
       if (growthRef.current) {
         const el = growthRef.current;
@@ -95,7 +117,7 @@ export default function Projects() {
       }
       killAllGSAP();
     };
-  }, []);
+  }, [isMobile]);
 
   return (
 
@@ -130,7 +152,7 @@ export default function Projects() {
             </div>
             <div className="project_name_container">
                 <div className="project_name_detail active project-1">
-                    <div className="subtitle_36 text_bg textAni">The Great Western Mumbai</div>
+                    <div className="subtitle_36 text_bg textAni">The Great Western Mumbai.</div>
                     <div className="subtitle_24 textAni">
                         Lorem ipsum dolor sit amet, consectetur
                         adipiscing elit, sed do eiusmod tempor incididunt

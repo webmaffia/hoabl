@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect,useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { killAllGSAP } from "./gsapCleanup";
@@ -16,7 +16,14 @@ export default function About() {
   const subtitleRef4 = useRef(null);
   const paragraphRef = useRef(null);
   const sectionRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
 
+  useEffect(() => {
+    const checkIsMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
   useEffect(() => {
     const ctx = gsap.context(() => {
     // const textElements = gsap.utils.toArray('.text');
@@ -286,17 +293,18 @@ export default function About() {
         duration: 0.2,
         stagger: 0.04,
         ease: "power2.out",
+        markers: true,
         scrollTrigger: {
           trigger: '.leadership_section',
-          start: "top 90%",
-          end: "bottom 20%",
+          start:isMobile ? "top 60%" : "top -100%",
+          end: "bottom -20%",
           scrub: 1,
         }
       });
     }
 
       gsap.set('.leader_img', { x: "100%" });
-
+   
 
      
         const tl = gsap.timeline({
@@ -313,7 +321,18 @@ export default function About() {
           x: "0%",
           duration: 1.2,
           ease: "power2.out"
-        })
+        });
+
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start:'top top',
+            end: 'bottom 100%',
+            scrub: 1,
+            pin: true,
+           
+          }
+        });
     }, sectionRef);
 
 
@@ -343,7 +362,7 @@ export default function About() {
       window.removeEventListener("popstate", preNavCleanup);
       window.removeEventListener("beforeunload", preNavCleanup);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
    <section ref={sectionRef} data-section="about_section" className="about_section">
@@ -357,7 +376,7 @@ export default function About() {
           and journeys designed for the driven.
         </div>
         <div>
-            <a href="/about" className="subtitle_48"><span className="link">KNOW MORE</span></a>
+            <a href="/about" className="subtitle_48 view_link"><span className="link">KNOW MORE</span></a>
         </div>
     </div>
     <div data-section="leadership_section" className="leadership_section">
@@ -373,12 +392,9 @@ export default function About() {
                         He is a bold thinker with the ability to see the big picture. 
                         His leadership blends strategy with empathy, scale with precision. With deep 
                         conviction and sharp instinct, he has crafted businesses that are unique in 
-                        the way they operate. He shapes organizations that inspire people to follow, 
-                        setting new benchmarks for what Indian enterprises can become: fearless, 
-                        future-ready, and built on trust that endures.
-             
+                        the way they operate.              
                 </p>
-                <a href="/about" className="subtitle_48"><span className="link">KNOW MORE</span></a>
+                <a href="/about" className="subtitle_48 view_link"><span className="link">KNOW MORE</span></a>
             </div>
         </div>
     </div>

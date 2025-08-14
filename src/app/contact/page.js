@@ -14,7 +14,7 @@ export default function ContactUs() {
     <div className="inner_banner_container">
         {/* <h2 className="subtitle_473">Contact us</h2> */}
         <div className="subtitle_10877">
-            The first step of many. Let’s begin.
+            The Gateway to Your Growth Journey.
         </div>
     </div>
 </section>

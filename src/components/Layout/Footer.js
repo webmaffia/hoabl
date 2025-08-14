@@ -1,63 +1,119 @@
 "use client";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect,useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import FooterForm from "../FooterForm"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { killAllGSAP } from "../gsapCleanup";
 
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Footer() {
+  const pathname = usePathname();
   const textRef = useRef(null);
   const imgRef = useRef(null);
+   const [isMobile, setIsMobile] = useState(false);
+  
+    useEffect(() => {
+      const checkIsMobile = () => setIsMobile(window.innerWidth <= 768);
+      checkIsMobile();
+      window.addEventListener("resize", checkIsMobile);
+      return () => window.removeEventListener("resize", checkIsMobile);
+    }, []);
 
   useEffect(() => {
+  // Delay to ensure DOM is updated before running GSAP
+  const timeout = setTimeout(() => {
+    const textAni = gsap.utils.toArray('.textAni');
+    textAni.forEach(Ani => {
+      gsap.fromTo(
+        Ani,
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          scrollTrigger: {
+            trigger: Ani,
+            start: "top 80%",
+            end: "top 60%",
+            scrub: true,
+          },
+        }
+      );
+    });
+    ScrollTrigger.refresh();
+  }, 0);
 
-const textAni = gsap.utils.toArray('.textAni');
+  return () => {
+    clearTimeout(timeout);
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+  };
+}, [isMobile, pathname]);
 
-textAni.forEach(Ani => {
- gsap.fromTo(
-      Ani,
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        scrollTrigger: {
-          trigger: Ani,
-          start: "top 80%",
-          end: "top 60%",
-          scrub: true,
-        },
-      }
-    );
-});
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
-   
+  useEffect(() => {
+    const onPop = () => killAllGSAP();
+    const onBefore = () => killAllGSAP();
+
+    window.addEventListener("popstate", onPop);
+    window.addEventListener("beforeunload", onBefore);
+
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      window.removeEventListener("popstate", onPop);
+      window.removeEventListener("beforeunload", onBefore);
     };
-  }, []);
+  }, [pathname,isMobile]);
+
+  // Synchronous NavLink wrapper: runs killAllGSAP() before Next does client navigation.
+  const NavLink = ({ href, children, className = "", ...props }) => (
+    <Link
+      href={href}
+      className={className}
+      onClick={(e) => {
+        try {
+          // Only kill GSAP when navigating to a different pathname (not just a hash change)
+          const hrefString = typeof href === 'string' ? href : String(href);
+          let targetPathname = pathname;
+          try {
+            const url = new URL(hrefString, window.location.origin);
+            targetPathname = url.pathname || '/';
+          } catch (_) {
+            const [pathPart] = hrefString.split('#');
+            if (pathPart) targetPathname = pathPart;
+          }
+          if (targetPathname !== pathname) {
+            // must be synchronous before Next.js client nav
+            killAllGSAP();
+          }
+        } catch (err) {
+          console.warn("killAllGSAP failed:", err);
+        }
+        if (props.onClick) props.onClick(e);
+      }}
+      {...props}
+    >
+      {children}
+    </Link>
+  );
 
   return (
   <footer>
    <div className="footer_wrapper">
         <div className="footer_left">
             <a href="" className="logo_img">
-                <img src="/images/logo.webp" alt="Logo" width="357" height="194" />
+                <img src="/images/green/logo.webp" alt="logo" width="2320" height="524" />
             </a>
-        </div>
-        <div className="footer_container">
-            <div className="subtitle_13343">GET IN TOUCH</div>
-        </div>
-    </div>
-    <div className="footer_wrapper">
-        <div className="footer_left">
             <address>
                 <div className="subtitle_30">
                     Corporate office -
                 </div>
                 <div className="subtitle_22">
-                    3<sup>rd</sup> Floor, Lodha Excelus, Apollo Mills
+                    3rd Floor, Lodha Excelus, Apollo Mills
                     Compound, NM Joshi Marg, Mahalakshmi,
                     Mumbai - 488811
                 </div>
@@ -71,91 +127,97 @@ textAni.forEach(Ani => {
             </div>
         </div>
         <div className="footer_container">
+            <div className="subtitle_13343">GET IN TOUCH</div>
             <FooterForm />
+        </div>
+    </div>
+    {/* <div className="footer_wrapper">
+        <div className="footer_left">
+        </div>
+        <div className="footer_container">
+          
+        </div>
+    </div> */}
+
             <div className="form_navigation">
                 <ul>
                     <li>
-                        <a href="/about" className="subtitle_24 textAni">About us</a>
+                        <NavLink href="/about" className="subtitle_24 textAni">About us</NavLink>
                         <ul className="inner_nav">
                             <li className="textAni">
-                                <a href="/about#company" className="subtitle_24">The Company</a>
+                                <NavLink href="/about#company" className="subtitle_24">The Company</NavLink>
                             </li>
                             <li className="textAni">
-                                <a href="/about#Visionary" className="subtitle_24">The Visionary</a>
+                                <NavLink href="/about#Visionary" className="subtitle_24">The Visionary</NavLink>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li className="textAni">
+                        <NavLink href="/manifesto" className="subtitle_24 ">Manifesto</NavLink>
+                        <ul className="inner_nav">
+                            <li className="textAni">
+                                <NavLink href="/manifesto#purpose" className="subtitle_24 ">Purpose</NavLink>
+                            </li>
+                            <li className="textAni">
+                                <NavLink href="/manifesto#philosophy" className="subtitle_24 ">Philosophy</NavLink>
+                            </li>
+                            <li className="textAni">
+                                <NavLink href="/manifesto#pledge" className="subtitle_24 ">Pledge</NavLink>
                             </li>
                         </ul>
                     </li>
                 </ul>
                 {/* <ul>
                     <li className="textAni">
-                        <a href="/manifesto" className="subtitle_24 ">Manifesto</a>
+                        <NavLink href="#promises" className="subtitle_24 ">Promises</NavLink>
+                    </li>
+                </ul> */}
+                <ul>
+                    <li className="textAni">
+                        <NavLink href="/#growth" className="subtitle_24 ">Growth Corridor</NavLink>
                         <ul className="inner_nav">
                             <li className="textAni">
-                                <a href="/manifesto#purpose" className="subtitle_24 ">Purpose</a>
+                                <NavLink href="" className="subtitle_24 ">Mumbai</NavLink>
                             </li>
                             <li className="textAni">
-                                <a href="/manifesto#philosophy" className="subtitle_24 ">Philosophy</a>
+                                <NavLink href="" className="subtitle_24 ">Nashik <sup>Coming Soon</sup></NavLink>
                             </li>
                             <li className="textAni">
-                                <a href="/manifesto#pledge" className="subtitle_24 ">Pledge</a>
+                                <NavLink href="" className="subtitle_24 ">Delhi <sup>Coming Soon</sup></NavLink>
                             </li>
                         </ul>
                     </li>
                 </ul>
                 <ul>
                     <li className="textAni">
-                        <a href="#promises" className="subtitle_24 ">Promises</a>
-                    </li>
-                </ul>     */}
-                <ul>
-                    <li className="textAni">
-                        <a href="/#growth" className="subtitle_24 ">Growth Corridor</a>
-                        <ul className="inner_nav">
-                            <li className="textAni">
-                                <a href="" className="subtitle_24 ">Mumbai</a>
-                            </li>
-                            <li className="textAni">
-                                <a href="" className="subtitle_24 ">Nashik <sup>Coming Soon</sup></a>
-                            </li>
-                            <li className="textAni">
-                                <a href="" className="subtitle_24 ">Delhi <sup>Coming Soon</sup></a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul>
-                    <li className="textAni">
-                        <a href="/contact" className="subtitle_24 ">Contact Us</a>
+                        <NavLink href="/contact" className="subtitle_24 ">Contact Us</NavLink>
                     </li>
                     <li className="textAni">
-                        <a href="/privacy-policy" className="subtitle_24 ">Privacy Policy</a>
+                        <NavLink href="/privacy-policy" className="subtitle_24 ">Privacy Policy</NavLink>
                     </li>
                     <li className="textAni">
-                        <a href="/disclaimer" className="subtitle_24 ">Disclaimer</a>
+                        <NavLink href="/disclaimer" className="subtitle_24 ">Disclaimer</NavLink>
                     </li>
-                 
                 </ul>
                 {/* <ul>
                     <li className="textAni">
-                        <a href="" className="subtitle_24 ">FAQs</a>
+                        <NavLink href="" className="subtitle_24 ">FAQs</NavLink>
                     </li>
                     <li className="textAni">
-                        <a href="" className="subtitle_24 ">Collaborators</a>
+                        <NavLink href="" className="subtitle_24 ">Collaborators</NavLink>
                     </li>
                     <li className="textAni">
-                        <a href="" className="subtitle_24 ">Privacy</a>
+                        <NavLink href="" className="subtitle_24 ">Privacy</NavLink>
                     </li>
                     <li className="textAni">
-                        <a href="" className="subtitle_24 ">Terms and Conditions</a>
+                        <NavLink href="" className="subtitle_24 ">Terms and Conditions</NavLink>
                     </li>
                 </ul> */}
             </div>
-          
-        </div>
-    </div>
-
     
-    <div className="footer_para_wrapper">
+    <div className="footer_para_wrapper textAni">
         <p className="disclaimer_text">
             The House of Abhinandan Lodha has been established in 2020 and is not, in any manner, associated with 'Lodha' or 'Lodha Group'.
         </p>

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
+import PopupForm from "./PopupForm";
 import { usePathname } from "next/navigation";
 import { killAllGSAP } from "./gsapCleanup";
 
@@ -12,13 +13,14 @@ export default function Header() {
   const [hasBeenShown, setHasBeenShown] = useState(false);
   const [shouldShowBlackHeader, setShouldShowBlackHeader] = useState(false);
   const [currentScrollY, setCurrentScrollY] = useState(0);
+  const [utmParams, setUtmParams] = useState('');
   const lastScrollY = useRef(0);
 
   
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const bannerAnimationEnd = 4000; // Banner ScrollTrigger end value
+      const bannerAnimationEnd = 969; // Banner ScrollTrigger end value
       
       setCurrentScrollY(scrollY);
       
@@ -62,6 +64,11 @@ export default function Header() {
     }
   }, [isMenuActive]);
 
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   const handleMenuClick = (e) => {
     e.preventDefault();
     setIsMenuActive(true);
@@ -74,7 +81,7 @@ export default function Header() {
 
   // Build className conditionally
   const isHomepage = pathname === "/";
-  const headerClassName = `header ${showHeader ? (currentScrollY > 100 && currentScrollY <= 8000 ? `active ${isHomepage ? 'whiteheader' : ''}` : (shouldShowBlackHeader ? 'active' : '')) : 'header--hidden'}`;
+  const headerClassName = `header ${showHeader ? (currentScrollY > 100 && currentScrollY <= 969 ? `active ${isHomepage ? 'whiteheader' : ''}` : (shouldShowBlackHeader ? 'active' : '')) : 'header--hidden'}`;
 
 
 
@@ -125,14 +132,34 @@ export default function Header() {
     </Link>
   );
 
+   useEffect(() => {
+    const storageKey = 'NurixSessionData';
+    const stored = localStorage.getItem(storageKey);
+    let sessionId = null;
+
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      sessionId = parsed.sessionId; // same ID from layout.js
+    }
+
+    const openChatWidget = () => {
+      if (window.nurixWidget && sessionId) {
+        window.nurixWidget('OPEN', { sessionId, userId: 'xxxx' });
+      }
+    };
+
+    openChatWidget();
+  }, []);
+
   return (
+    <>
     <header className={headerClassName}>
       <NavLink href="/" className={`logo_img ${isMenuActive ? "active" : ""}`} >
-        <img src="/images/logo.webp" alt="logo" width="357" height="194" />
+        <img src="/images/green/logo.webp" alt="logo" width="2320" height="524" />
       </NavLink>
 
       <div className={`header_nav ${isMenuActive ? "active" : ""}`}>
-        <div className="subtitle_18 close_btn" onClick={handleCloseClick}>Close</div>
+        <div className="close_text view_white subtitle_24" onClick={handleCloseClick}>Close</div>
         <ul className="header_navigation">
           <li className="header_list">
             <NavLink href="/about" className="subtitle_22 header_link view_white text_bg2" >ABOUT US</NavLink>
@@ -160,22 +187,36 @@ export default function Header() {
               </li>
             </ul>
           </li>
-<li className="header_list">
+          <li className="header_list">
             <NavLink href="/#promises" className="subtitle_22 header_link view_white text_bg2" >PROMISES</NavLink>
           </li>
           <li className="header_list">
             <NavLink href="/#growth" className="subtitle_22 header_link view_white text_bg2" >GROWTH CORRIDORS</NavLink>
+            <ul className="inner_header">
+              <li className="header_sub_list">
+                <NavLink href="/#growth" className="subtitle_18 header_sub_link view_white text_bg2" >Mumbai</NavLink>
+              </li>
+              <li className="header_sub_list">
+                <NavLink href="/" className="subtitle_18 header_sub_link view_white text_bg2 disabled_cursor" >Nashik <sup>Coming Soon</sup></NavLink>
+              </li>
+              <li className="header_sub_list">
+                <NavLink href="/" className="subtitle_18 header_sub_link view_white text_bg2 disabled_cursor" >Delhi <sup>Coming Soon</sup></NavLink>
+              </li>
+            </ul>
           </li>
 
           <li className="header_list">
             <NavLink href="/contact" className="subtitle_22 header_link view_white text_bg2" >CONTACT</NavLink>
           </li>
         </ul>
+        <PopupForm/>
       </div>
 
-      <div className="menu_btn" onClick={() => setIsMenuActive(true)}>
+      <div className={`menu_btn ${isMenuActive ? "active" : ""}`} onClick={() => setIsMenuActive(true)}>
         <img src="/images/menu.webp" alt="menu" className="menu_img" width="56" height="36" />
       </div>
     </header>
-  );
+      <NavLink href="https://registration.growwithhoabl.com" target="_blank" className={`login_btn${isMenuActive ? "active" : ""}`}><span className="view_white">Login</span></NavLink>
+    </>
+);
 }

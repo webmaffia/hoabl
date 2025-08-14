@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect,useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
@@ -11,9 +11,16 @@ export default function Promises() {
   const paragraphRef = useRef(null);
   const manSvgRef = useRef(null);
   const ladySvgRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const isMobile = window.innerWidth <= 768;
+    const checkIsMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
+  useEffect(() => {
+
     gsap.registerPlugin(ScrollTrigger);
     const ctx = gsap.context(() => {
       // Text animation
@@ -50,10 +57,11 @@ export default function Promises() {
           stagger: 0.04,
           ease: "power2.out",
           scrollTrigger: {
-            trigger: ".promisesTrigger",
-            start: "top 90%",
-            end: "bottom 20%",
+            trigger: ".promisetxt",
+            start: "top -10%",
+            end: "bottom -80%",
             scrub: 1,
+           
           }
         });
       }
@@ -121,7 +129,7 @@ export default function Promises() {
       killAllGSAP();
     };
 
-  }, []);
+  }, [isMobile]);
 
   return (
     <section ref={sectionRef} data-section="developing_section" className="developing_section" id="promises">

@@ -19,20 +19,21 @@ export default function Banner() {
   const element2Ref = useRef(null);
   const element3Ref = useRef(null);
 
-  const [isAnimationLoaded, setIsAnimationLoaded] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const [isVideoReady, setIsVideoReady] = useState(false);
+  const [isAnimationLoaded, setIsAnimationLoaded] = useState(true);
+  const [videoLoaded, setVideoLoaded] = useState(true);
+  const [isVideoReady, setIsVideoReady] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
+
 
   const pathname = usePathname();
 
+  
+
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    const checkIsMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
   }, []);
 
   useEffect(() => {
@@ -52,7 +53,7 @@ export default function Banner() {
     triggerRef.current = ScrollTrigger.create({
       trigger: bannerRef.current,
       start: "top top",
-      end: "+=8000", 
+      end:isMobile ? 1500 : 3000, 
       scrub: true,
       pin: true,
       onUpdate: (self) => {
@@ -64,54 +65,59 @@ export default function Banner() {
      
         if (element1Ref.current) {
           const startTop = 55, endTop = -15;
-          // Slower animation - complete in first 25% of scroll
-          let adjustedProgress = Math.min(self.progress / 0.15, 1);
+          // Slower animation - complete in first 25% of scroll (faster on mobile)
+          let progressRange = isMobile ? 0.08 : 0.15;
+          let adjustedProgress = Math.min(self.progress / progressRange, 1);
           element1Ref.current.style.top = `${startTop + (endTop - startTop) * adjustedProgress}%`;
           
-          // Opacity animation - fade in slowly and stay visible longer
+          // Opacity animation - fade in and out faster on mobile
           let opacity = 1;
-          if (self.progress <= 0.08) {
-            opacity = self.progress / 0.08; 
-          } else if (self.progress <= 0.35) {
+          if (self.progress <= (isMobile ? 0.04 : 0.08)) {
+            opacity = self.progress / (isMobile ? 0.04 : 0.08); 
+          } else if (self.progress <= (isMobile ? 0.18 : 0.35)) {
             opacity = 1; 
-          } else if (self.progress <= 0.45) {
-            opacity = 1 - ((self.progress - 0.35) / 0.1); 
+          } else if (self.progress <= (isMobile ? 0.23 : 0.45)) {
+            opacity = 1 - ((self.progress - (isMobile ? 0.18 : 0.35)) / (isMobile ? 0.05 : 0.1)); 
           }
           element1Ref.current.style.opacity = opacity;
         }
         
         if (element2Ref.current) {
-          const startTop = isMobile ? 80 : 100, endTop = -10;
-          // Slower animation - start at 12% and complete by 30% of scroll
-          let adjustedProgress = Math.max(0, Math.min(1, (self.progress - 0.12) / 0.18));
+          const startTop = isMobile ? 70 : 100, endTop = -10;
+          // Slower animation - start at 12% and complete by 30% of scroll (faster on mobile)
+          let start = isMobile ? 0.06 : 0.12;
+          let range = isMobile ? 0.09 : 0.18;
+          let adjustedProgress = Math.max(0, Math.min(1, (self.progress - start) / range));
           element2Ref.current.style.top = `${startTop + (endTop - startTop) * adjustedProgress}%`;
           
-          // Opacity animation - fade in slowly after element1
+          // Opacity animation - fade in and out faster on mobile
           let opacity = 0;
-          if (self.progress >= 0.15 && self.progress <= 0.22) {
-            opacity = (self.progress - 0.15) / 0.07; 
-          } else if (self.progress > 0.22 && self.progress <= 0.4) {
+          if (self.progress >= (isMobile ? 0.08 : 0.15) && self.progress <= (isMobile ? 0.115 : 0.22)) {
+            opacity = (self.progress - (isMobile ? 0.08 : 0.15)) / (isMobile ? 0.035 : 0.07); 
+          } else if (self.progress > (isMobile ? 0.115 : 0.22) && self.progress <= (isMobile ? 0.2 : 0.4)) {
             opacity = 1; 
-          } else if (self.progress > 0.4 && self.progress <= 0.5) {
-            opacity = 1 - ((self.progress - 0.4) / 0.1); 
+          } else if (self.progress > (isMobile ? 0.2 : 0.4) && self.progress <= (isMobile ? 0.25 : 0.5)) {
+            opacity = 1 - ((self.progress - (isMobile ? 0.2 : 0.4)) / (isMobile ? 0.05 : 0.1)); 
           }
           element2Ref.current.style.opacity = opacity;
         }
         
         if (element3Ref.current) {
-          const startTop = isMobile ? 60 : 100, endTop = -15;
-          // Slower animation - start at 25% and complete by 45% of scroll
-          let adjustedProgress = Math.max(0, Math.min(1, (self.progress - 0.25) / 0.2));
+          const startTop = isMobile ? 75 : 100, endTop = -15;
+          // Slower animation - start at 25% and complete by 45% of scroll (faster on mobile)
+          let start = isMobile ? 0.13 : 0.25;
+          let range = isMobile ? 0.1 : 0.2;
+          let adjustedProgress = Math.max(0, Math.min(1, (self.progress - start) / range));
           element3Ref.current.style.top = `${startTop + (endTop - startTop) * adjustedProgress}%`;
           
-          // Opacity animation - fade in slowly after element2
+          // Opacity animation - fade in and out faster on mobile
           let opacity = 0;
-          if (self.progress >= 0.28 && self.progress <= 0.35) {
-            opacity = (self.progress - 0.28) / 0.07; 
-          } else if (self.progress > 0.35 && self.progress <= 0.5) {
+          if (self.progress >= (isMobile ? 0.145 : 0.28) && self.progress <= (isMobile ? 0.18 : 0.35)) {
+            opacity = (self.progress - (isMobile ? 0.145 : 0.28)) / (isMobile ? 0.035 : 0.07); 
+          } else if (self.progress > (isMobile ? 0.18 : 0.35) && self.progress <= (isMobile ? 0.25 : 0.5)) {
             opacity = 1; 
-          } else if (self.progress > 0.5 && self.progress <= 0.6) {
-            opacity = 1 - ((self.progress - 0.5) / 0.1); 
+          } else if (self.progress > (isMobile ? 0.25 : 0.5) && self.progress <= (isMobile ? 0.3 : 0.6)) {
+            opacity = 1 - ((self.progress - (isMobile ? 0.25 : 0.5)) / (isMobile ? 0.05 : 0.1)); 
           }
           element3Ref.current.style.opacity = opacity;
         }
@@ -129,7 +135,7 @@ export default function Banner() {
       window.removeEventListener("popstate", preNavCleanup);
       window.removeEventListener("beforeunload", preNavCleanup);
     };
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     const setVH = () => {
@@ -154,7 +160,7 @@ export default function Banner() {
       {!(isAnimationLoaded && isVideoReady) && (
         <div style={{
           position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh",
-          background: "linear-gradient(145deg,#ffb454 0%,#d75c33 100%)",
+          background: 'linear-gradient(145deg, #ffb454 0%, #d75c33 100%)',
           display: "flex", justifyContent: "center", alignItems: "center",
           zIndex: 9999999, backdropFilter: "blur(10px)"
         }}>
@@ -186,7 +192,7 @@ export default function Banner() {
           </video>
         )}
 
-        <div className="DB-Wrapper">
+        {/* <div className="DB-Wrapper">
           <Lottie
             lottieRef={animationRef}
             animationData={isMobile ? animationMobileData : animationData}
@@ -198,9 +204,9 @@ export default function Banner() {
             rendererSettings={{ preserveAspectRatio: "xMidYMid slice" }}
             className="DB-Container"
           />
-        </div>
+        </div> */}
 
-        <div className="banner_container">
+        {/* <div className="banner_container">
           <div className="banner_element element_1" ref={element1Ref}>
             <div className="subtitle_70"><span className="db">Step into a world of Growth.</span></div>
           </div>
@@ -212,7 +218,9 @@ export default function Banner() {
           <div className="banner_element element_3" ref={element3Ref} style={{ opacity: 0 }}>
             <div className="subtitle_70"><span className="db">Powered by design. Elevated by tech.</span><span className="db">Built for you.</span></div>
           </div>
-        </div>
+        </div> */}
+
+        <div className="subtitle_14 scroll_text">SCROLL TO EXPLORE</div>
       </section>
     </>
   );

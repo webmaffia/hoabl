@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect,useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import BridgeSvg from "@/components/bridgeSvg";
@@ -16,7 +16,14 @@ export default function  AboutPage() {
       const aboutRef3 = useRef(null);
       const aboutRef4 = useRef(null);
 
-
+   const [isMobile, setIsMobile] = useState(false);
+  
+    useEffect(() => {
+      const checkIsMobile = () => setIsMobile(window.innerWidth <= 768);
+      checkIsMobile();
+      window.addEventListener("resize", checkIsMobile);
+      return () => window.removeEventListener("resize", checkIsMobile);
+    }, []);
 
       useEffect(() => {
          gsap.registerPlugin(ScrollTrigger);
@@ -124,7 +131,7 @@ export default function  AboutPage() {
           killAllGSAP();
         };
     
-      }, []);
+      }, [isMobile]);
     return(
         <div>
 
@@ -142,7 +149,7 @@ export default function  AboutPage() {
     <div className="inner_banner_container">
         {/* <h2 className="subtitle_473">About Us</h2> */}
         <div className="subtitle_10877">
-            A launchpad for Growth
+            A launchpad for <br />Growth.
         </div>
     </div>
 </section>

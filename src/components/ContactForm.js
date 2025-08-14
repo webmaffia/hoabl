@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function ContactForm() {
@@ -11,8 +11,21 @@ export default function ContactForm() {
     message: '',
   });
 
+  const [utmParams, setUtmParams] = useState({});
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+
+  // Extract UTM parameters when component mounts
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setUtmParams({
+      utm_source: params.get('utm_source') || '',
+      utm_campaign: params.get('utm_campaign') || '',
+      utm_medium: params.get('utm_medium') || '',
+      utm_term: params.get('utm_term') || '',
+      utm_content: params.get('utm_content') || '',
+    });
+  }, []);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -42,48 +55,22 @@ export default function ContactForm() {
     ],
     Opportunity: {
       OpportunityEventCode: 12000,
-      Fields: [
-        {
-          SchemaName: 'mx_Custom_1', 
-          Value: `${firstName} – HoABL Naigaon`,
-        },
-        {
-          SchemaName: 'mx_Custom_16', 
-          Value: 'HoABL Naigaon',
-        },
-        {
-          SchemaName: 'mx_Custom_17', 
-          Value: 'Residential',
-        },
-        {
-          SchemaName: 'Owner',
-          Value: 'vigneswaran.k@xanadu.in',
-        },
-        {
-          SchemaName: 'mx_Custom_73',
-          Value: 'Web Leads',
-        },
-        {
-          SchemaName: 'Status',
-          Value: 'Open',
-        },
-        {
-          SchemaName: 'mx_Custom_2', 
-          Value: 'Not Attempted',
-        },
-        {
-          SchemaName: 'mx_Custom_3', 
-          Value: 'Facebook',
-        },
-        {
-          SchemaName: 'mx_Custom_20', 
-          Value: 'Palacio PW 123',
-        },
-        {
-          SchemaName: 'mx_Custom_21', 
-          Value: 'XYZ',
-        },
-      ],
+     Fields: [
+            { SchemaName: 'mx_Custom_1', Value: `${firstName} – HOABL Naigaon` },
+            { SchemaName: 'mx_Custom_16', Value: 'HOABL Naigaon' },
+            { SchemaName: 'mx_Custom_17', Value: 'Residential' },
+            { SchemaName: 'Owner', Value: 'vigneswaran.k@xanadu.in' },
+            { SchemaName: 'mx_Custom_73', Value: 'Web Leads' },
+            { SchemaName: 'Status', Value: 'Open' },
+            { SchemaName: 'mx_Custom_2', Value: 'Not Attempted' },
+
+            // UTM Mapping
+            { SchemaName: 'mx_Custom_3', Value: utmParams.utm_source },   // UTM Source
+            { SchemaName: 'mx_Custom_20', Value: utmParams.utm_campaign }, // UTM Campaign
+            { SchemaName: 'mx_Custom_21', Value: utmParams.utm_medium },   // UTM Medium
+            { SchemaName: 'mx_Custom_22', Value: utmParams.utm_term },     // UTM Term
+            { SchemaName: 'mx_Custom_23', Value: utmParams.utm_content },  // UTM Content
+          ],
     },
   };
       const leadResponse = await axios.post(
@@ -137,7 +124,7 @@ export default function ContactForm() {
   return (
     <section data-section="contact_form" className="contact_form">
       <div className="contact_form_wrapper">
-        <div className="subtitle_120 text_bg">Get in Touch</div>
+        <div className="subtitle_120 text_bg">Get In Touch</div>
         <div className="form_container">
           <form onSubmit={handleSubmit}>
             <div className="form_box">

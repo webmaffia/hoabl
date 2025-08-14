@@ -28,9 +28,9 @@ const paragraphRef = useRef(null);
     fade: true,
     asNavFor: nav2,
     centerMode: true,
-    speed: 3000,
+    speed: 4000,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 2000,
   };
 
   const profileTextSettings = {
@@ -40,11 +40,18 @@ const paragraphRef = useRef(null);
     dots: false,
     centerMode: true,
     focusOnSelect: true,
-    speed: 3000,
+    speed: 2500,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 2000,
   };
+  const [isMobile, setIsMobile] = useState(false);
 
+  useEffect(() => {
+    const checkIsMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
   useEffect(() => {
 
     if (paragraphRef.current) {
@@ -102,13 +109,13 @@ const paragraphRef = useRef(null);
 
     
    
-      const isMobile = window.innerWidth <= 768;
+    
       
       tl = gsap.timeline({
         scrollTrigger: {
           trigger: manifestoRef.current,
           start: isMobile ? "top 5%" : "top -20%",
-          end:12000,
+          end:isMobile ? 3000 : 6000,
           scrub: true, 
           pin: true,
         
@@ -167,11 +174,11 @@ const paragraphRef = useRef(null);
         console.error('Error during Manifesto cleanup:', error);
       }
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <section ref={manifestoRef} data-section="manifesto_section" className="manifesto_section">
-      <div className="manifesto_title">
+      <div class="manifesto_title">
           <img src="/images/manifest/the.webp" alt="" width="129" height="85" />
       </div>
       <div ref={manifestoWrapperRef} className="manifesto_wrapper">
@@ -298,7 +305,7 @@ const paragraphRef = useRef(null);
                 This is where India lives forward.
         </p>
       </div>
-      <a href="/manifesto" className="subtitle_48 textAni"><span className="link">KNOW MORE</span></a>
+      <a href="/manifesto" className="subtitle_48 view_link textAni"><span className="link">KNOW MORE</span></a>
 </div>
     </section>
   );
