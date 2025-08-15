@@ -314,6 +314,14 @@ footer .footer_para_wrapper .disclaimer_text {
     transition-delay: 1s;
   }
 
+
+header.active .logo_img.active {
+  opacity: 1 !important;
+  filter: invert(1) brightness(0) !important;
+  transition: all .4s ease-in;
+  transition-delay: 1s;
+}
+
   #contactForm{
     margin-bottom: 10vw !important;
   }
@@ -515,12 +523,6 @@ header.active .logo_img {
   opacity: 0 !important;
 }
 
-header.active.whiteheader .logo_img.active {
-  opacity: 1 !important;
-  filter: invert(1) brightness(0) !important;
-  transition: all .4s ease-in;
-  transition-delay: 1s;
-}
 
 header.active.whiteheader .logo_img {
   opacity: 1 !important;
